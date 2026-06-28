@@ -36,7 +36,7 @@ body:not(.dark) {
   color: var(--color-zinc-900);
 }
 
-/* Aurora orb utility — CSS-only radial gradient blobs */
+/* Aurora orb utility - CSS-only radial gradient blobs */
 .aurora-orb {
   position: fixed;
   border-radius: 50%;

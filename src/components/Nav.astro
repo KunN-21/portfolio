@@ -1,0 +1,16 @@
+---
+import ThemeToggle from "./ThemeToggle";
+---
+
+<nav class="sticky top-0 z-50 h-16 flex items-center justify-between px-6 md:px-10 lg:px-16 bg-zinc-950/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800/50" role="navigation" aria-label="Main navigation">
+  <a href="#" class="text-lg font-bold tracking-tighter text-zinc-100 no-underline">
+    NK
+  </a>
+
+  <div class="flex items-center gap-6">
+    <a href="#about" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">About</a>
+    <a href="#projects" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Projects</a>
+    <a href="#contact" class="text-sm text-zinc-400 hover:text-zinc-100 transition-colors no-underline">Contact</a>
+    <ThemeToggle client:visible />
+  </div>
+</nav>

@@ -58,8 +58,12 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    @keyframes aurora-drift-1,
-    @keyframes aurora-drift-2,
+    @keyframes aurora-drift-1 {
+      0%, 100% { transform: none; }
+    }
+    @keyframes aurora-drift-2 {
+      0%, 100% { transform: none; }
+    }
     @keyframes aurora-drift-3 {
       0%, 100% { transform: none; }
     }

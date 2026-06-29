@@ -9,5 +9,8 @@ export default defineConfig({
   base: '/portfolio',
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      cssMinify: 'esbuild',
+    },
   },
 });

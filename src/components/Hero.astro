@@ -1,34 +1,88 @@
 ---
+import MagneticCTA from "./MagneticCTA";
 ---
 
 <section class="relative min-h-[100dvh] flex items-center pt-20 pb-24 px-6 md:px-10 lg:px-16 overflow-hidden">
   <!-- Left: text stack -->
   <div class="relative z-10 max-w-2xl">
-    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-none text-zinc-100 mb-6 max-w-[12ch]">
+    <p class="hero-anim-1 inline-block text-sm font-mono uppercase tracking-[0.3em] text-accent mb-6 opacity-0 translate-y-3">
+      AI Engineer · RAG · Computer Vision
+    </p>
+    <h1
+      id="hero-title"
+      class="hero-anim-2 text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-[1.05] text-zinc-900 dark:text-zinc-100 mb-6 max-w-[12ch] opacity-0 translate-y-6"
+    >
       Vu Khanh Nam
     </h1>
-    <p class="text-lg md:text-xl text-zinc-400 max-w-[40ch] leading-relaxed mb-10">
+    <p class="hero-anim-3 text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-[40ch] leading-relaxed mb-10 opacity-0 translate-y-4">
       Building RAG systems and computer vision pipelines that ship. Hybrid retrieval, multi-LLM orchestration, custom YOLO detectors - from research to production.
     </p>
-    <div class="flex flex-wrap gap-4">
-      <a
+    <div class="hero-anim-4 flex flex-wrap gap-4 opacity-0 translate-y-3">
+      <MagneticCTA
         href="https://github.com/KunN-21"
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-white font-medium text-sm hover:bg-accent-soft transition-colors no-underline"
+        variant="primary"
+        external
+        client:visible
       >
-        View GitHub
+        <span>View GitHub</span>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <a
+      </MagneticCTA>
+      <MagneticCTA
         href="mailto:vukhanhnam.nv@gmail.com"
-        class="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-zinc-700 text-zinc-200 font-medium text-sm hover:border-zinc-500 transition-colors no-underline"
+        variant="outline"
+        client:visible
       >
         Get in touch
-      </a>
+      </MagneticCTA>
     </div>
   </div>
 
   <!-- Right: aurora visual (CSS-only) -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] min-w-[320px] aspect-square pointer-events-none" aria-hidden="true">
-    <div class="w-full h-full rounded-full blur-3xl" style="background: radial-gradient(circle at 40% 50%, rgba(59,130,246,0.25) 0%, rgba(20,184,166,0.12) 45%, transparent 70%);"></div>
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] min-w-[320px] aspect-square pointer-events-none hero-anim-5 opacity-0" aria-hidden="true">
+    <div class="w-full h-full rounded-full blur-3xl" style="background: radial-gradient(circle at 40% 50%, rgba(59,130,246,0.35) 0%, rgba(20,184,166,0.18) 45%, transparent 70%);"></div>
   </div>
 </section>
+
+<style>
+  @keyframes heroEnter {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes auroraPulse {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+      opacity: 0.9;
+    }
+    50% {
+      transform: scale(1.15) rotate(45deg);
+      opacity: 1;
+    }
+  }
+
+  .hero-anim-1 {
+    animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+  .hero-anim-2 {
+    animation: heroEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+  }
+  .hero-anim-3 {
+    animation: heroEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+  }
+  .hero-anim-4 {
+    animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+  }
+  .hero-anim-5 {
+    animation: heroEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, auroraPulse 8s ease-in-out 1.5s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-anim-1, .hero-anim-2, .hero-anim-3, .hero-anim-4, .hero-anim-5 {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

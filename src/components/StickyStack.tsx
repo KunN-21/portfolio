@@ -50,12 +50,17 @@ function StickyCard({
   const scale = useTransform(scrollYProgress, [start, end], [1, 0.92]);
   const opacity = useTransform(scrollYProgress, [start, end], [1, 0.55]);
 
+  const isLast = index === total - 1;
+  const positionClass = isLast
+    ? "relative w-full px-4 md:px-6 flex justify-center pb-12"
+    : "sticky top-20 w-full px-4 md:px-6 flex justify-center";
+
   return (
     <motion.div
-      className="sticky top-20 w-full px-4 md:px-6 flex justify-center"
+      className={positionClass}
       style={{
-        scale,
-        opacity,
+        scale: isLast ? 1 : scale,
+        opacity: isLast ? 1 : opacity,
         zIndex: index + 1,
       }}
     >

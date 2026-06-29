@@ -37,9 +37,48 @@ import MagneticCTA from "./MagneticCTA";
     </div>
   </div>
 
-  <!-- Right: aurora visual (CSS-only) -->
-  <div class="absolute right-0 top-1/2 -translate-y-1/2 w-[45%] min-w-[320px] aspect-square pointer-events-none hero-anim-5 opacity-0" aria-hidden="true">
-    <div class="w-full h-full rounded-full blur-3xl" style="background: radial-gradient(circle at 40% 50%, rgba(59,130,246,0.35) 0%, rgba(20,184,166,0.18) 45%, transparent 70%);"></div>
+  <!-- Right: composed tech visual -->
+  <div class="absolute right-0 top-1/2 -translate-y-1/2 hidden md:block w-[46%] min-w-[380px] max-w-[560px] aspect-square pointer-events-none hero-anim-5 opacity-0" aria-hidden="true">
+    <!-- aurora glow behind -->
+    <div class="absolute inset-0 rounded-full blur-3xl" style="background: radial-gradient(circle at 50% 50%, rgba(59,130,246,0.28) 0%, rgba(20,184,166,0.16) 45%, transparent 70%);"></div>
+
+    <!-- terminal window -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[78%] max-w-[440px] rounded-xl overflow-hidden border border-zinc-200/70 dark:border-zinc-700/70 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md shadow-2xl">
+      <div class="flex items-center gap-1.5 px-3 py-2 bg-zinc-100/90 dark:bg-zinc-800/90 border-b border-zinc-200/70 dark:border-zinc-700/70">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+        <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+        <span class="ml-3 text-[10px] font-mono text-zinc-500">rag_pipeline.py</span>
+      </div>
+      <div class="p-4 font-mono text-[11px] leading-relaxed text-zinc-700 dark:text-zinc-300">
+        <div><span class="text-purple-600 dark:text-purple-400">from</span> rag <span class="text-purple-600 dark:text-purple-400">import</span> HybridRetriever</div>
+        <div class="mt-1 text-zinc-500"><span class="text-zinc-400 dark:text-zinc-600"># vector + BM25</span></div>
+        <div>r = <span class="text-blue-600 dark:text-blue-400">HybridRetriever</span>(α=<span class="text-amber-600 dark:text-amber-300">0.6</span>)</div>
+        <div class="mt-1">docs = r.search(query)</div>
+        <div>answer = llm.<span class="text-blue-600 dark:text-blue-400">generate</span>(docs)</div>
+        <div class="mt-2 pt-2 border-t border-zinc-200/70 dark:border-zinc-700/70 flex items-center gap-2 text-zinc-500">
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse"></span>
+          <span>agent loop active</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- orbiting tech badges -->
+    <div class="absolute top-[8%] left-[6%] float-badge" style="animation-delay: 0s;">
+      <span class="px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/60 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-lg backdrop-blur-sm">YOLOv11</span>
+    </div>
+    <div class="absolute top-[18%] right-[0%] float-badge" style="animation-delay: 0.7s;">
+      <span class="px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/60 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-lg backdrop-blur-sm">LangChain</span>
+    </div>
+    <div class="absolute top-[46%] left-[-4%] float-badge" style="animation-delay: 1.4s;">
+      <span class="px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/60 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-lg backdrop-blur-sm">SAM 2</span>
+    </div>
+    <div class="absolute bottom-[18%] left-[8%] float-badge" style="animation-delay: 2.1s;">
+      <span class="px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/60 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-lg backdrop-blur-sm">PyTorch</span>
+    </div>
+    <div class="absolute bottom-[6%] right-[14%] float-badge" style="animation-delay: 2.8s;">
+      <span class="px-3 py-1.5 rounded-full bg-white/90 dark:bg-zinc-800/90 border border-zinc-200/60 dark:border-zinc-700/60 text-xs font-mono text-zinc-700 dark:text-zinc-200 shadow-lg backdrop-blur-sm">ChromaDB</span>
+    </div>
   </div>
 </section>
 
@@ -48,17 +87,6 @@ import MagneticCTA from "./MagneticCTA";
     to {
       opacity: 1;
       transform: translateY(0);
-    }
-  }
-
-  @keyframes auroraPulse {
-    0%, 100% {
-      transform: scale(1) rotate(0deg);
-      opacity: 0.9;
-    }
-    50% {
-      transform: scale(1.15) rotate(45deg);
-      opacity: 1;
     }
   }
 
@@ -75,7 +103,15 @@ import MagneticCTA from "./MagneticCTA";
     animation: heroEnter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
   }
   .hero-anim-5 {
-    animation: heroEnter 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards, auroraPulse 8s ease-in-out 1.5s infinite;
+    animation: heroEnter 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+  }
+
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0px); }
+    50%      { transform: translateY(-12px); }
+  }
+  .float-badge {
+    animation: floatBadge 5s ease-in-out infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -83,6 +119,9 @@ import MagneticCTA from "./MagneticCTA";
       animation: none;
       opacity: 1;
       transform: none;
+    }
+    .float-badge {
+      animation: none;
     }
   }
 </style>

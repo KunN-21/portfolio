@@ -51,18 +51,122 @@ body:not(.dark) {
     animation: none;
     opacity: 0.14;
   }
+  body:not(.dark) .aurora-orb {
+    opacity: 0.08;
+  }
 }
 
-/* Section stagger basis */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
+body:not(.dark) .aurora-orb {
+  opacity: 0.12;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+/* Section reveal animations */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@layer components {
+  /* Reveal animation classes (triggered by IntersectionObserver) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(80px) scale(0.96);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Stagger delays for child elements */
+  .stagger-1 { transition-delay: 0.1s; }
+  .stagger-2 { transition-delay: 0.2s; }
+  .stagger-3 { transition-delay: 0.3s; }
+  .stagger-4 { transition-delay: 0.4s; }
+  .stagger-5 { transition-delay: 0.5s; }
+  .stagger-6 { transition-delay: 0.6s; }
+}
+
+/* Hover lift effect */
+.hover-lift {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Animated gradient border */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(
+    var(--color-zinc-900),
+    var(--color-zinc-900)
+  );
+  background-size: 100% 100%;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-aurora-teal),
+    var(--color-aurora-indigo),
+    var(--color-accent)
+  );
+  background-size: 300% 300%;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: gradientShift 6s ease infinite;
+  pointer-events: none;
+}
+
+body:not(.dark) .gradient-border {
+  background: linear-gradient(#fff, #fff);
+}
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
+
+/* Animated underline link */
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-accent);
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after {
+  width: 100%;
 }
 
 /* Metric tile gradient tints */
@@ -77,3 +181,4 @@ body:not(.dark) {
 .metric-indigo {
   background: radial-gradient(ellipse at 50% 50%, rgba(79, 70, 229, 0.12), transparent 70%);
 }
+</content>

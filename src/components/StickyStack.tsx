@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, Children } from "react";
 import { useScroll, useTransform, motion, useReducedMotion } from "motion/react";
 
 interface Props {
@@ -9,7 +9,7 @@ export default function StickyStack({ children }: Props) {
   const containerRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
 
-  const items = Array.isArray(children) ? children : [children];
+  const items = Children.toArray(children);
 
   if (shouldReduceMotion || items.length === 0) {
     return <div className="flex flex-col gap-16">{items}</div>;
@@ -56,7 +56,7 @@ function StickyCard({
       style={{
         scale,
         opacity,
-        zIndex: total - index,
+        zIndex: index + 1,
       }}
     >
       {children}

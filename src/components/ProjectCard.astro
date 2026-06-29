@@ -13,9 +13,9 @@ const metricGradients: Record<string, string> = {
 };
 ---
 
-<div class="rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm p-6 md:p-8 lg:p-10 w-full max-w-3xl mx-auto">
+<div class="rounded-xl border border-zinc-200/50 dark:border-zinc-800/50 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-sm p-5 md:p-6 lg:p-7 w-full max-w-3xl mx-auto shadow-sm">
   <!-- Header -->
-  <div class="flex items-baseline justify-between mb-8">
+  <div class="flex items-baseline justify-between mb-5">
     <div>
       <h3 class="text-2xl md:text-3xl font-bold tracking-tighter text-zinc-900 dark:text-zinc-100 mb-1">
         {project.title}
@@ -26,9 +26,9 @@ const metricGradients: Record<string, string> = {
   </div>
 
   <!-- Metric tiles -->
-  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-5">
     {project.metrics.map((m) => (
-      <div class={`rounded-xl border border-zinc-200/30 dark:border-zinc-800/30 p-4 ${metricGradients[m.gradient] ?? "metric-blue"}`}>
+      <div class={`rounded-xl border border-zinc-200/30 dark:border-zinc-800/30 p-3 ${metricGradients[m.gradient] ?? "metric-blue"}`}>
         <p class="font-mono text-xl md:text-2xl font-bold text-accent tracking-tight mb-1">{m.value}</p>
         <p class="text-xs text-zinc-500 dark:text-zinc-500">{m.label}</p>
       </div>
@@ -36,13 +36,13 @@ const metricGradients: Record<string, string> = {
   </div>
 
   <!-- Architecture diagram (inline SVG from real data) -->
-  <div class="mb-8 p-4 rounded-xl border border-zinc-200/30 dark:border-zinc-800/30 bg-zinc-50/40 dark:bg-zinc-950/40">
-    <p class="text-xs font-medium text-zinc-400 dark:text-zinc-600 uppercase tracking-wider mb-4">Architecture Flow</p>
+  <div class="mb-5 p-3 rounded-xl border border-zinc-200/30 dark:border-zinc-800/30 bg-zinc-50/40 dark:bg-zinc-950/40 max-h-[34vh] overflow-y-auto">
+    <p class="text-xs font-medium text-zinc-400 dark:text-zinc-600 uppercase tracking-wider mb-2 sticky top-0 bg-zinc-50/95 dark:bg-zinc-950/95 backdrop-blur-sm py-1 -mx-3 px-3 z-10">Architecture Flow</p>
     <Fragment set:html={buildArchPath(project.archFlow)} />
   </div>
 
   <!-- Tech badges -->
-  <div class="flex flex-wrap gap-2 mb-8">
+  <div class="flex flex-wrap gap-2 mb-5">
     {project.techBadges.map((badge) => (
       <span class="px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/60 text-xs text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/40">
         {badge}

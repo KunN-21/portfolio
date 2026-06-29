@@ -64,22 +64,22 @@ export const projects: ProjectData[] = [
 
 // SVG path generator for architecture flow diagram
 export function buildArchPath(steps: ArchStep[]): string {
-  const BOX_H = 28;
-  const GAP = 36;
+  const BOX_H = 22;
+  const GAP = 18;
   const totalH = steps.length * (BOX_H + GAP) - GAP;
 
-  let svg = `<svg class="w-full" viewBox="0 0 320 ${totalH + 16}" xmlns="http://www.w3.org/2000/svg">\n`;
+  let svg = `<svg class="w-full" viewBox="0 0 320 ${totalH + 8}" xmlns="http://www.w3.org/2000/svg">\n`;
   svg += `  <defs>\n    <linearGradient id="flow-grad" x1="0" y1="0" x2="0" y2="1">\n      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>\n      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.2"/>\n    </linearGradient>\n  </defs>\n`;
 
   steps.forEach((step, i) => {
-    const y = 8 + i * (BOX_H + GAP);
+    const y = 4 + i * (BOX_H + GAP);
     if (i < steps.length - 1) {
-      svg += `  <line x1="16" y1="${y + BOX_H}" x2="16" y2="${y + BOX_H + GAP}" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="4 3"/>\n`;
+      svg += `  <line x1="14" y1="${y + BOX_H}" x2="14" y2="${y + BOX_H + GAP}" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="3 2"/>\n`;
     }
-    svg += `  <circle cx="16" cy="${y + BOX_H / 2}" r="4" fill="#3b82f6" fill-opacity="0.8"/>\n`;
-    svg += `  <rect x="30" y="${y}" width="280" height="${BOX_H}" rx="6" fill="url(#flow-grad)" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="0.5"/>\n`;
-    svg += `  <text x="40" y="${y + 11}" font-family="Geist, sans-serif" font-size="10" fill="#f4f4f5" font-weight="600">${step.label}</text>\n`;
-    svg += `  <text x="40" y="${y + 22}" font-family="Geist, sans-serif" font-size="8" fill="#a1a1aa">${step.detail}</text>\n`;
+    svg += `  <circle cx="14" cy="${y + BOX_H / 2}" r="3" fill="#3b82f6" fill-opacity="0.8"/>\n`;
+    svg += `  <rect x="26" y="${y}" width="284" height="${BOX_H}" rx="5" fill="url(#flow-grad)" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="0.5"/>\n`;
+    svg += `  <text x="34" y="${y + 9}" font-family="Geist, sans-serif" font-size="9" fill="#f4f4f5" font-weight="600">${step.label}</text>\n`;
+    svg += `  <text x="34" y="${y + 18}" font-family="Geist, sans-serif" font-size="7" fill="#a1a1aa">${step.detail}</text>\n`;
   });
 
   svg += `</svg>`;

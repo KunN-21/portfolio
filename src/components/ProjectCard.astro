@@ -3,10 +3,9 @@ import { buildArchPath, type ProjectData } from "../data/projects";
 
 interface Props {
   project: ProjectData;
-  index: number;
 }
 
-const { project, index } = Astro.props;
+const { project } = Astro.props;
 const metricGradients: Record<string, string> = {
   blue: "metric-blue",
   teal: "metric-teal",

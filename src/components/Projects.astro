@@ -13,8 +13,8 @@ import { projects } from "../data/projects";
   </div>
 
   <StickyStack client:load>
-    {projects.map((p, i) => (
-      <ProjectCard project={p} index={i} />
+    {projects.map((p) => (
+      <ProjectCard project={p} />
     ))}
   </StickyStack>
 </section>

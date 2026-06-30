@@ -54,7 +54,7 @@ export default function MagneticCTA({
       whileHover={reduce ? undefined : { scale: 1.03 }}
       whileTap={reduce ? undefined : { scale: 0.97 }}
       transition={{ type: "spring", stiffness: 280, damping: 22 }}
-      className={`magnetic-cta inline-flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm no-underline transition-colors ${variantClass} ${className}`}
+      className={`magnetic-cta inline-flex items-center gap-2 whitespace-nowrap px-6 py-3 rounded-full font-medium text-sm no-underline transition-colors ${variantClass} ${className}`}
       {...rest}
     >
       {children}

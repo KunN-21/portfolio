@@ -1,20 +1,21 @@
 ---
-import StickyStack from "./StickyStack.tsx";
 import ProjectCard from "./ProjectCard.astro";
 import { projects } from "../data/projects";
 ---
 
-<section id="projects" class="py-24 px-6 md:px-10 lg:px-16">
-  <div class="max-w-5xl mx-auto mb-12">
-    <p class="reveal text-sm font-medium tracking-widest uppercase text-accent mb-4">Projects</p>
-    <h2 class="reveal stagger-1 text-3xl md:text-4xl font-bold tracking-tighter text-zinc-900 dark:text-zinc-100">
-      What I've Built
+<section id="projects" class="py-24 lg:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+  <div class="max-w-5xl mx-auto mb-14 lg:mb-20">
+    <p class="reveal text-sm font-medium tracking-widest uppercase text-accent mb-4">
+      Projects
+    </p>
+    <h2 class="reveal stagger-1 text-3xl md:text-5xl font-bold tracking-tighter text-zinc-900 dark:text-zinc-100 leading-[1.05] max-w-[16ch]">
+      Things I shipped, not just read about.
     </h2>
   </div>
 
-  <StickyStack client:load>
-    {projects.map((p) => (
-      <ProjectCard project={p} />
+  <div class="max-w-5xl mx-auto flex flex-col gap-10 lg:gap-14">
+    {projects.map((p, i) => (
+      <ProjectCard project={p} index={i} />
     ))}
-  </StickyStack>
+  </div>
 </section>

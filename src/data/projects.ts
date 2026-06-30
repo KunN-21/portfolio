@@ -62,24 +62,41 @@ export const projects: ProjectData[] = [
   },
 ];
 
-// SVG path generator for architecture flow diagram
+// SVG path generator for architecture flow diagram.
+// Theme-aware via .arch-flow CSS vars (defined in global.css).
 export function buildArchPath(steps: ArchStep[]): string {
   const BOX_H = 22;
   const GAP = 18;
   const totalH = steps.length * (BOX_H + GAP) - GAP;
 
-  let svg = `<svg class="w-full" viewBox="0 0 320 ${totalH + 8}" xmlns="http://www.w3.org/2000/svg">\n`;
-  svg += `  <defs>\n    <linearGradient id="flow-grad" x1="0" y1="0" x2="0" y2="1">\n      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>\n      <stop offset="100%" stop-color="#14b8a6" stop-opacity="0.2"/>\n    </linearGradient>\n  </defs>\n`;
+  const escape = (s: string) =>
+    s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+  let svg = `<svg class="w-full arch-flow" viewBox="0 0 320 ${totalH + 8}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Architecture flow diagram">\n`;
+  svg += `<style>
+    .arch-flow .stroke { stroke: var(--arch-stroke); }
+    .arch-flow .stroke-soft { stroke: var(--arch-stroke-soft); }
+    .arch-flow .node { fill: var(--arch-stroke); fill-opacity: 0.85; }
+    .arch-flow .box { fill: url(#flow-grad); stroke: var(--arch-stroke); stroke-opacity: 0.30; stroke-width: 0.5; }
+    .arch-flow .label { fill: var(--arch-label); font: 600 9px Geist, ui-sans-serif, sans-serif; }
+    .arch-flow .detail { fill: var(--arch-detail); font: 7px Geist, ui-sans-serif, sans-serif; }
+  </style>\n`;
+  svg += `<defs>
+    <linearGradient id="flow-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--arch-fill-from)"/>
+      <stop offset="100%" stop-color="var(--arch-fill-to)"/>
+    </linearGradient>
+  </defs>\n`;
 
   steps.forEach((step, i) => {
     const y = 4 + i * (BOX_H + GAP);
     if (i < steps.length - 1) {
-      svg += `  <line x1="14" y1="${y + BOX_H}" x2="14" y2="${y + BOX_H + GAP}" stroke="#3b82f6" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="3 2"/>\n`;
+      svg += `<line class="stroke-soft" x1="14" y1="${y + BOX_H}" x2="14" y2="${y + BOX_H + GAP}" stroke-width="1.5" stroke-dasharray="3 2"/>\n`;
     }
-    svg += `  <circle cx="14" cy="${y + BOX_H / 2}" r="3" fill="#3b82f6" fill-opacity="0.8"/>\n`;
-    svg += `  <rect x="26" y="${y}" width="284" height="${BOX_H}" rx="5" fill="url(#flow-grad)" stroke="#3b82f6" stroke-opacity="0.25" stroke-width="0.5"/>\n`;
-    svg += `  <text x="34" y="${y + 9}" font-family="Geist, sans-serif" font-size="9" fill="#f4f4f5" font-weight="600">${step.label}</text>\n`;
-    svg += `  <text x="34" y="${y + 18}" font-family="Geist, sans-serif" font-size="7" fill="#a1a1aa">${step.detail}</text>\n`;
+    svg += `<circle class="node" cx="14" cy="${y + BOX_H / 2}" r="3"/>\n`;
+    svg += `<rect class="box" x="26" y="${y}" width="284" height="${BOX_H}" rx="5"/>\n`;
+    svg += `<text class="label" x="34" y="${y + 9}">${escape(step.label)}</text>\n`;
+    svg += `<text class="detail" x="34" y="${y + 18}">${escape(step.detail)}</text>\n`;
   });
 
   svg += `</svg>`;

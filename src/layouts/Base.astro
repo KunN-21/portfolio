@@ -74,9 +74,13 @@ import "../styles/global.css";
           { threshold: 0.12, rootMargin: "0px 0px -60px 0px" }
         );
         function attach() {
-          document.querySelectorAll(".reveal, .reveal-left, .reveal-right, .reveal-scale").forEach(function (el) {
-            observer.observe(el);
-          });
+          const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          const els = document.querySelectorAll(".reveal");
+          if (reduce) {
+            els.forEach(function (el) { el.classList.add("visible"); });
+          } else {
+            els.forEach(function (el) { observer.observe(el); });
+          }
         }
         if (document.readyState === "loading") {
           document.addEventListener("DOMContentLoaded", attach);
@@ -87,6 +91,7 @@ import "../styles/global.css";
     </script>
   </head>
   <body class="antialiased bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-zinc-900 focus:rounded focus:shadow">Skip to content</a>
     <slot />
   </body>
 </html>

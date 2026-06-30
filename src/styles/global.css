@@ -7,8 +7,8 @@
   --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
   --color-zinc-950: #0a0a0b;
   --color-zinc-50: #fafafa;
-  --color-accent: #3b82f6;
-  --color-accent-soft: #60a5fa;
+  --color-accent: #2563eb;
+  --color-accent-soft: #3b82f6;
   --color-aurora-blue: #3b82f6;
   --color-aurora-teal: #14b8a6;
   --color-aurora-indigo: #4f46e5;
@@ -85,6 +85,23 @@ body:not(.dark) .aurora-orb {
 .hover-lift {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reduced motion: collapse all reveal/hover-lift/animate-pulse to instant.
+   If JS observer fails, content must remain visible. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.2s linear;
+  }
+  .hover-lift {
+    transition: none;
+  }
+  .animate-pulse,
+  .motion-safe\:animate-pulse {
+    animation: none;
+  }
 }
 
 .hover-lift:hover {
@@ -168,5 +185,23 @@ section {
 
 .metric-indigo {
   background: radial-gradient(ellipse at 50% 50%, rgba(79, 70, 229, 0.12), transparent 70%);
+}
+
+/* Architecture-flow SVG colors. Theme-aware so the diagram stays
+   legible in both modes without re-running the React/Astro build. */
+.arch-flow {
+  --arch-stroke: #3b82f6;          /* accent connector dot */
+  --arch-stroke-soft: #3b82f6;     /* dashed line */
+  --arch-label: #18181b;           /* zinc-900 (light default) */
+  --arch-detail: #52525b;          /* zinc-600 */
+  --arch-fill-from: rgba(59, 130, 246, 0.14);
+  --arch-fill-to: rgba(20, 184, 166, 0.10);
+}
+
+.dark .arch-flow {
+  --arch-label: #f4f4f5;
+  --arch-detail: #a1a1aa;
+  --arch-fill-from: rgba(59, 130, 246, 0.30);
+  --arch-fill-to: rgba(20, 184, 166, 0.20);
 }
 </content>

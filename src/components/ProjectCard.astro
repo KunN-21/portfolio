@@ -36,7 +36,7 @@ const accentClass = index % 2 === 0
   <!-- Metric strip: full-width divider + row of value/label pairs -->
   <div class="border-y border-zinc-200/70 dark:border-zinc-800/70 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-zinc-200/70 dark:divide-zinc-800/70 mb-8">
     {project.metrics.map((m) => (
-      <div class={`px-4 py-4 sm:px-5 first:pl-0 last:pr-0 ${metricGradients[m.gradient] ?? "metric-blue"} rounded-none`}>
+      <div class={`px-5 py-4 ${metricGradients[m.gradient] ?? "metric-blue"} rounded-none`}>
         <p class="font-mono text-sm md:text-base font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight mb-1 break-words">
           {m.value}
         </p>

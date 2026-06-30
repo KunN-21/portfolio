@@ -1,43 +1,55 @@
-# Astro Starter Kit: Minimal
+# Vu Khanh Nam - Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Personal portfolio site. Static, fast, dual-mode.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**Live:** https://kunn-21.github.io/portfolio/
 
-## 🚀 Project Structure
+## Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- [Astro 7](https://astro.build/) - static site generator
+- [React 19](https://react.dev/) - interactive islands (MagneticCTA, ThemeToggle)
+- [Tailwind CSS 4](https://tailwindcss.com/) - utility-first styling
+- [Motion](https://motion.dev/) - pointer physics for CTAs
+- TypeScript strict
+
+## Project structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── components/     Astro + React components (Hero, ProjectCard, Skills, ...)
+├── data/           Static content (projects.ts)
+├── layouts/        Base.astro - HTML shell, fonts, theme flash guard
+├── pages/          index.astro - page composition
+└── styles/         global.css - Tailwind v4 entrypoint, design tokens
+public/             Static assets (favicon, og image)
+.github/workflows/  Pages deploy on push to main
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Local development
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+npm install
+npm run dev        # localhost:4321/portfolio
+npm run build      # ./dist
+npm run preview    # serve ./dist
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+Node 22+ required.
 
-## 🧞 Commands
+## Deployment
 
-All commands are run from the root of the project, from a terminal:
+GitHub Pages via `.github/workflows/deploy.yml`. Each push to `main` triggers `npm ci` + `astro build` + upload artifact to Pages. Approx 30-60s per deploy.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+Astro `base: '/portfolio'` is set to match the GitHub repo path. Change in `astro.config.mjs` if hosting at root.
 
-## 👀 Want to learn more?
+## Accessibility
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Skip-to-content link
+- Theme toggle respects `prefers-color-scheme` and stores user choice
+- All animations honor `prefers-reduced-motion`
+- Color contrast meets WCAG AA on body text
+- Semantic landmarks (`<main>`, `<nav>`, `<section>`, `<footer>`)
+
+## License
+
+MIT.

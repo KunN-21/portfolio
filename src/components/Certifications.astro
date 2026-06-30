@@ -9,14 +9,14 @@ const certs = [
   {
     title: "TOEIC Listening & Reading",
     org: "ETS",
+    validity: "valid 2026 – 2028",
     score: "735 / 990",
-    period: "2026 – 2028",
   },
   {
     title: "TOEIC Speaking & Writing",
     org: "ETS",
+    validity: "valid 2026 – 2028",
     score: "280 / 400",
-    period: "2026 – 2028",
   },
 ];
 ---
@@ -32,6 +32,11 @@ const certs = [
         <div class={`reveal stagger-${i + 1} py-5 grid grid-cols-12 gap-4 items-baseline`}>
           <dt class="col-span-12 sm:col-span-5 text-base font-semibold text-zinc-900 dark:text-zinc-100 leading-snug">
             {c.title}
+            {c.validity && (
+              <span class="block mt-1 font-mono text-[11px] font-normal text-zinc-500 dark:text-zinc-500 normal-case tracking-normal">
+                {c.validity}
+              </span>
+            )}
           </dt>
           <dd class="col-span-7 sm:col-span-3 font-mono text-xs text-zinc-500 dark:text-zinc-500 uppercase tracking-wider">
             {c.org}

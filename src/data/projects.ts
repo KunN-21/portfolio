@@ -80,6 +80,11 @@ export function buildArchPath(steps: ArchStep[]): string {
     .arch-flow .box { fill: url(#flow-grad); stroke: var(--arch-stroke); stroke-opacity: 0.30; stroke-width: 0.5; }
     .arch-flow .label { fill: var(--arch-label); font: 600 9px Geist, ui-sans-serif, sans-serif; }
     .arch-flow .detail { fill: var(--arch-detail); font: 7px Geist, ui-sans-serif, sans-serif; }
+    .arch-flow g.step { opacity: 0; animation: arch-step-in 0.4s ease-out forwards; }
+    @keyframes arch-step-in { to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .arch-flow g.step { opacity: 1; animation: none; }
+    }
   </style>\n`;
   svg += `<defs>
     <linearGradient id="flow-grad" x1="0" y1="0" x2="0" y2="1">
@@ -90,6 +95,8 @@ export function buildArchPath(steps: ArchStep[]): string {
 
   steps.forEach((step, i) => {
     const y = 4 + i * (BOX_H + GAP);
+    const delay = `${i * 80}ms`;
+    svg += `<g class="step" style="animation-delay:${delay}">\n`;
     if (i < steps.length - 1) {
       svg += `<line class="stroke-soft" x1="14" y1="${y + BOX_H}" x2="14" y2="${y + BOX_H + GAP}" stroke-width="1.5" stroke-dasharray="3 2"/>\n`;
     }
@@ -97,6 +104,7 @@ export function buildArchPath(steps: ArchStep[]): string {
     svg += `<rect class="box" x="26" y="${y}" width="284" height="${BOX_H}" rx="5"/>\n`;
     svg += `<text class="label" x="34" y="${y + 9}">${escape(step.label)}</text>\n`;
     svg += `<text class="detail" x="34" y="${y + 18}">${escape(step.detail)}</text>\n`;
+    svg += `</g>\n`;
   });
 
   svg += `</svg>`;
